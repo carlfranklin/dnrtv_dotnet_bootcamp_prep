@@ -1,7 +1,7 @@
 configs ={
   :git => {
     :user => "developwithpassion",
-    :remotes => potentially_change("remotes",__FILE__),
+    :remotes => %w[carlfranklin],
     :repo => 'dnrtv_dotnet_bootcamp_prep' 
   }
 }
