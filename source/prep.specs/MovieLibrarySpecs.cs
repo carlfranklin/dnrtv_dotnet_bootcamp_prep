@@ -57,7 +57,6 @@ using prep.specs.utility;
 
 namespace prep.specs
 {
-  [Subject(typeof(MovieLibrary))]
   public class MovieLibrarySpecs
   {
     public abstract class movie_library_concern : Observes<MovieLibrary>
@@ -91,7 +90,7 @@ namespace prep.specs
     {
       static Movie first_movie;
       static Movie second_movie;
-      static IEnumerable<Movie> all_movies;
+      static IEnumerable<Movie> result;
 
       Establish c = () =>
       {
@@ -102,10 +101,10 @@ namespace prep.specs
       };
 
       Because b = () =>
-        all_movies = sut.all_movies();
+        result = sut.all_movies();
 
       It should_receive_a_set_containing_each_movie_in_the_library = () =>
-        all_movies.ShouldContainOnly(first_movie, second_movie);
+        result.ShouldContainOnly(first_movie, second_movie);
     }
 
     public class when_trying_to_change_the_set_of_movies_returned_by_the_movie_library_to_a_mutable_type :
@@ -119,6 +118,11 @@ namespace prep.specs
         first_movie = new Movie();
         second_movie = new Movie();
         movie_collection.add_all(first_movie, second_movie);
+
+        foreach (var movie in sut.all_movies())
+        {
+          
+        }
       };
 
       Because b = () =>

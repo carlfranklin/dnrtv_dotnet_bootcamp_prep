@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using prep.utility;
 
 namespace prep.collections
 {
@@ -14,7 +15,7 @@ namespace prep.collections
 
     public IEnumerable<Movie> all_movies()
     {
-      return this.movies;
+      return movies.one_at_a_time();
     }
 
     public void add(Movie movie)
