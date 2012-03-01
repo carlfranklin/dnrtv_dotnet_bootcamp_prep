@@ -119,10 +119,6 @@ namespace prep.specs
         second_movie = new Movie();
         movie_collection.add_all(first_movie, second_movie);
 
-        foreach (var movie in sut.all_movies())
-        {
-          
-        }
       };
 
       Because b = () =>
