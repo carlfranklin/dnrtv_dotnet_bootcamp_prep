@@ -66,8 +66,12 @@
     <Compile Include="collections\ProductionStudio.cs" />
     <Compile Include="collections\ReadOnlySetOf.cs" />
     <Compile Include="collections\SomeListOfMovies.cs" />
-    <Compile Include="utility\Criteria.cs" />
+    <Compile Include="utility\matching\AnonymousMatch.cs" />
+    <Compile Include="utility\matching\Criteria.cs" />
     <Compile Include="utility\EnumerableExtensions.cs" />
+    <Compile Include="utility\matching\IMatchAn.cs" />
+    <Compile Include="utility\matching\MatchExtensions.cs" />
+    <Compile Include="utility\matching\OrMatch.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using prep.utility;
+using prep.utility.matching;
 
 namespace prep.collections
 {
@@ -32,7 +33,7 @@ namespace prep.collections
 
     public IEnumerable<Movie> all_movies_matching(MovieCriteria criteria)
     {
-      return movies.all_items_matching(criteria.Invoke);
+      return movies.all_items_matching(new AnonymousMatch<Movie>(criteria.Invoke));
     }
 
     public IEnumerable<Movie> all_movies_published_by_pixar_or_disney()

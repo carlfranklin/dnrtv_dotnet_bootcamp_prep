@@ -1,6 +1,9 @@
-﻿namespace prep.collections
+﻿using prep.utility;
+using prep.utility.matching;
+
+namespace prep.collections
 {
-  public class IsPublishedBy
+  public class IsPublishedBy : IMatchAn<Movie>
   {
     ProductionStudio studio;
 

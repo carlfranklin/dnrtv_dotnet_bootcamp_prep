@@ -1,5 +1,6 @@
 using System;
 using prep.utility;
+using prep.utility.matching;
 
 namespace prep.collections
 {
@@ -28,22 +29,22 @@ namespace prep.collections
       return this.title.GetHashCode();
     }
 
-    public static Condition<Movie> is_published_by(ProductionStudio  studio)
+    public static IMatchAn<Movie> is_published_by(ProductionStudio  studio)
     {
-      return new IsPublishedBy(studio).matches;
+      return new IsPublishedBy(studio);
     }
-    public static Condition<Movie> is_in_genre(Genre genre)
+    public static IMatchAn<Movie> is_in_genre(Genre genre)
     {
-      return new IsInGenre(genre).matches;
-    }
-
-    public static Condition<Movie> is_published_by_pixar_or_disney()
-    {
-      return movie => is_published_by(ProductionStudio.Pixar)(movie) || 
-        is_published_by(ProductionStudio.Disney)(movie);
+      return new IsInGenre(genre);
     }
 
-    public static Condition<Movie> is_published_by_pixar()
+    public static IMatchAn<Movie> is_published_by_pixar_or_disney()
+    {
+      return is_published_by(ProductionStudio.Pixar)
+        .or(is_published_by(ProductionStudio.Disney));
+    }
+
+    public static IMatchAn<Movie> is_published_by_pixar()
     {
       return is_published_by(ProductionStudio.Pixar);
     }

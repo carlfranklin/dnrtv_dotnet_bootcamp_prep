@@ -1,6 +1,8 @@
-﻿namespace prep.collections
+﻿using prep.utility.matching;
+
+namespace prep.collections
 {
-  public class IsInGenre
+  public class IsInGenre : IMatchAn<Movie>
   {
     Genre genre;
 
@@ -12,6 +14,6 @@
     public bool matches(Movie movie)
     {
       return movie.genre == genre;
-    } 
+    }
   }
 }
