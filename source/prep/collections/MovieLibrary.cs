@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using prep.utility;
+using prep.utility.matching;
 
 namespace prep.collections
 {
@@ -14,48 +16,56 @@ namespace prep.collections
 
     public IEnumerable<Movie> all_movies()
     {
-      return this.movies;
+      return movies.one_at_a_time();
     }
 
     public void add(Movie movie)
     {
-      throw new NotImplementedException();
+      if (already_contains(movie)) return;
+
+      movies.Add(movie);
     }
 
-
-    public IEnumerable<Movie> all_movies_published_by_pixar()
+    bool already_contains(Movie movie)
     {
-      throw new NotImplementedException();
+      return movies.Contains(movie);
+    }
+
+    public IEnumerable<Movie> all_movies_matching(MovieCriteria criteria)
+    {
+      return movies.all_items_matching(new AnonymousMatch<Movie>(criteria.Invoke));
     }
 
     public IEnumerable<Movie> all_movies_published_by_pixar_or_disney()
     {
-      throw new NotImplementedException();
+      return
+        all_movies_matching(
+          m => m.production_studio == ProductionStudio.Disney || m.production_studio == ProductionStudio.Pixar);
     }
 
     public IEnumerable<Movie> all_movies_not_published_by_pixar()
     {
-      throw new NotImplementedException();
+      return all_movies_matching(m => m.production_studio != ProductionStudio.Pixar);
     }
 
     public IEnumerable<Movie> all_movies_published_after(int year)
     {
-      throw new NotImplementedException();
+      return all_movies_matching(m => m.date_published.Year > year);
     }
 
     public IEnumerable<Movie> all_movies_published_between_years(int startingYear, int endingYear)
     {
-      throw new NotImplementedException();
+      return all_movies_matching(m => m.date_published.Year >= startingYear && m.date_published.Year <= endingYear);
     }
 
     public IEnumerable<Movie> all_kid_movies()
     {
-      throw new NotImplementedException();
+      return all_movies_matching(m => m.genre == Genre.kids);
     }
 
     public IEnumerable<Movie> all_action_movies()
     {
-      throw new NotImplementedException();
+      return all_movies_matching(m => m.genre == Genre.action);
     }
 
     public IEnumerable<Movie> sort_all_movies_by_date_published_descending()
